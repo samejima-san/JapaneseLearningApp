@@ -36,15 +36,14 @@ class activity2 : AppCompatActivity() {
     }
 
     fun setGame(gameTime: Int, gameKana: Array<Int>) {
-        val fixlater : Array<Int> = arrayOf(0,0)
-        if (gameKana.contentDeepEquals(fixlater))
+        if (gameKana.contentDeepEquals(arrayOf(0,0)))
         {
             //then do nothing
             displayError()
         }
         else
         {
-            openGame()
+            openGame(gameTime, gameKana)
         }
 
     }
@@ -87,9 +86,11 @@ class activity2 : AppCompatActivity() {
         Toast.makeText(this@activity2,"Enable a Kana", Toast.LENGTH_SHORT).show()
     }
 
-    fun openGame()
+    fun openGame(gameTime :Int, gameKana: Array<Int>)
     {
             val intent = Intent(this, Game::class.java)
+            intent.putExtra("gameTime", gameTime)
+            intent.putExtra("gameKana", gameKana)
             startActivity(intent)
     }
 

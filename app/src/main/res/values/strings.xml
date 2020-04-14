@@ -18,6 +18,14 @@
     <string name="gKana">DT</string>
     <string name="gameTimer">Time left:</string>
 
+
+
+    <string name="loginbutt">Log In</string>
+    <string name="signinbutt">Sign In</string>
+    <string name="passwordbutt">Passwordn</string>
+    <string name="emailbutt">Email</string>
+    <string name="signintop">Japanese apps</string>
+
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
