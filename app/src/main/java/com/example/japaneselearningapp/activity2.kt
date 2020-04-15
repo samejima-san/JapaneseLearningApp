@@ -24,12 +24,12 @@ class activity2 : AppCompatActivity() {
         val minButton = findViewById<Button>(R.id.minButt)
 
         thirButton.setOnClickListener {
-            var num:Int = 30 //thirty seconds
+            var num:Int = 30000 //thirty seconds
             setGame(num, checkGana())
         }
 
         minButton.setOnClickListener{
-            var num:Int = 60 //sixty seconds
+            var num:Int = 60000 //sixty seconds
             setGame(num, checkGana())
         }
     }

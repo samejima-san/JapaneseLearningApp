@@ -18,6 +18,8 @@
     <string name="gKana">DT</string>
     <string name="gameTimer">Time left:</string>
 
+    <string name="button5">Play Again?</string>
+
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
