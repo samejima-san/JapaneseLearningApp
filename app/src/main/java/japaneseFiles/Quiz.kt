@@ -1,27 +1,22 @@
 package japaneseFiles
-import com.example.japaneselearningapp.Game as Game
-import japaneseFiles.JapaneseCard
 import kotlin.random.Random
 
-
-class Quiz(var timer :Int , var score :Int = 0, var Deck :Array<Int>)
+//timer = get gTime from Game.kt, Deck = get gameKana from Game.kt
+class Quiz(var score:Int = 0, var Deck: Array<Int>)
 {
-    fun askQuestion()
+    fun askQuestion():Array<JapaneseCard>
     {
 
-        var random:Int = Random.nextInt(0,45) //gets a random number within the bounds of the kana deck
-        var card = chooseDeck(gameKana, random)//chooses a deck and returns your card
+        val random:Int = Random.nextInt(0,45) //gets a random number within the bounds of the kana deck
+        val card = chooseDeck(Deck, random)//chooses a deck and returns your card
         //put the kana into an array with 3 random others
-        var random2:Int = Random.nextInt(0,45)
-        var random3:Int = Random.nextInt(0,45)
-        var random4:Int = Random.nextInt(0,45)
-        var question :Array<String> = arrayOf(card.showUText(), HIRAGANA_DECK[random2].showUText(),HIRAGANA_DECK[random3].showUText(),HIRAGANA_DECK[random4].showUText())
+        val random2:Int = Random.nextInt(0,45)
+        val random3:Int = Random.nextInt(0,45)
+        val random4:Int = Random.nextInt(0,45)
+        val question : Array<JapaneseCard> = arrayOf(card, HIRAGANA_DECK[random2],HIRAGANA_DECK[random3],HIRAGANA_DECK[random4])
 
+        return arrayOf(question[0],question[1],question[2],question[3])
 
-    }
-
-    fun formatQuestion(card: JapaneseCard){
-        card.showUText()
     }
 
     fun chooseDeck(choice :Array<Int>, randomnum:Int):JapaneseCard{
@@ -29,21 +24,21 @@ class Quiz(var timer :Int , var score :Int = 0, var Deck :Array<Int>)
         if(choice.contentDeepEquals(arrayOf(1,0)))
         {
             //Hiragana only
-            return japaneseFiles.HIRAGANA_DECK[randomnum]
+            return HIRAGANA_DECK[randomnum]
         }
         else if (choice.contentDeepEquals(arrayOf(0,1)))
         {
             //Katakana only
-            return japaneseFiles.KATAKANA_DECK[randomnum]
+            return KATAKANA_DECK[randomnum]
         }
         else
         {
             //both
-            var randommeme:Int = Random.nextInt(0,1)
+            val randommeme:Int = Random.nextInt(0,1)
             return if(randommeme==0) {
-                japaneseFiles.HIRAGANA_DECK[randomnum]
+                HIRAGANA_DECK[randomnum]
             } else {
-                japaneseFiles.KATAKANA_DECK[randomnum]
+                KATAKANA_DECK[randomnum]
             }
         }
     }

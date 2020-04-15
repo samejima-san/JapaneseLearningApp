@@ -24,14 +24,13 @@ class activity2 : AppCompatActivity() {
         val minButton = findViewById<Button>(R.id.minButt)
 
         thirButton.setOnClickListener {
-            var num = 30 //thirty seconds
+            var num:Int = 30 //thirty seconds
             setGame(num, checkGana())
         }
 
         minButton.setOnClickListener{
-            var num = 60 //sixty seconds
-            var gana = checkGana()
-            setGame(num, gana)
+            var num:Int = 60 //sixty seconds
+            setGame(num, checkGana())
         }
     }
 
@@ -89,8 +88,8 @@ class activity2 : AppCompatActivity() {
     fun openGame(gameTime :Int, gameKana: Array<Int>)
     {
             val intent = Intent(this, Game::class.java)
-            intent.putExtra("gameTime", gameTime)
-            intent.putExtra("gameKana", gameKana)
+            intent.putExtra("gameTime", gameTime.toString())
+            intent.putExtra("gameKana", gameKana.toIntArray())
             startActivity(intent)
     }
 
