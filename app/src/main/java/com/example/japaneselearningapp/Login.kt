@@ -25,12 +25,12 @@ class Login : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
 
-       // val user: FirebaseUser = auth.currentUser!!
-       // if(user!=null)
-        //{
-         //   intent = Intent(applicationContext, activity2::class.java)
-          //  startActivity(intent)
-        //}
+        val user: FirebaseUser = auth.currentUser!!
+        if(user!=null)
+        {
+            intent = Intent(applicationContext, activity2::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

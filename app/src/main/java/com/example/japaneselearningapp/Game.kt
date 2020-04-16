@@ -11,6 +11,8 @@ import japaneseFiles.JapaneseCard
 import japaneseFiles.Quiz
 import kotlinx.android.synthetic.main.activity_game.*
 import org.w3c.dom.Text
+import java.util.Collections.shuffle
+import kotlin.random.Random
 
 
 lateinit var button1: Button
@@ -54,7 +56,7 @@ class Game : AppCompatActivity() {
         val Button4 = findViewById<TextView>(R.id.button4)
 
 
-        val gameQuiz = Quiz(0, arrayOf(1,1))
+        val gameQuiz = Quiz(0, gKana)//arrayOf(1,1)
         var question = gameQuiz.askQuestion() //this returns an array of Kana, with Question[0]being the one we are looking for
         val sText=findViewById<TextView>(R.id.textView7)
         gscore = gameQuiz.score.toString()
@@ -69,10 +71,25 @@ class Game : AppCompatActivity() {
             displayKana.text = kanaText
             answer= question[0].showUText()
             //for now I will leave it in order
-            firstButt = question[0].showUText()
-            secButt = question[1].showUText()
-            thirButt = question[2].showUText()
-            fourButt = question[3].showUText()
+            var cards  = arrayOf<Int>(0,1,2,3)
+
+            for(card in cards)
+            {
+                var r1 = Random.nextInt(0,4)
+                var r2 = Random.nextInt(0,4)
+                var temp:Int = 0
+                if(r1!=r2)
+                {
+                    temp = cards[r1]
+                    cards[r1] = cards[r2]
+                    cards[r2] = temp
+                }
+            }
+
+            firstButt = question[cards[0]].showUText()
+            secButt = question[cards[1]].showUText()
+            thirButt = question[cards[2]].showUText()
+            fourButt = question[cards[3]].showUText()
             Button1.text = firstButt
             Button2.text = secButt
             Button3.text = thirButt
@@ -81,8 +98,6 @@ class Game : AppCompatActivity() {
 
 
         Button1.setOnClickListener {
-            println(firstButt)
-            println(kanaText)
             if(firstButt == answer) {
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
