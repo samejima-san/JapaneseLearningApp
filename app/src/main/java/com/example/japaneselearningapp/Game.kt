@@ -1,6 +1,7 @@
 package com.example.japaneselearningapp
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -86,6 +87,7 @@ class Game : AppCompatActivity() {
                 }
             }
 
+
             firstButt = question[cards[0]].showUText()
             secButt = question[cards[1]].showUText()
             thirButt = question[cards[2]].showUText()
@@ -99,40 +101,56 @@ class Game : AppCompatActivity() {
 
         Button1.setOnClickListener {
             if(firstButt == answer) {
+                correctButton(Button1)
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
                 sText.text = "score: "+gscore
                 question = gameQuiz.askQuestion()
                 assignButt(question)
             }
+            else{
+                incorrectButton(Button1)
+            }
         }
         Button2.setOnClickListener() {
             if(secButt == answer) {
+                correctButton(Button2)
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
                 sText.text = "score: "+gscore
                 question = gameQuiz.askQuestion()
                 assignButt(question)
+            }
+            else{
+                incorrectButton(Button2)
             }
         }
 
         Button3.setOnClickListener() {
             if(thirButt == answer) {
+                correctButton(Button3)
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
                 sText.text = "score: "+gscore
                 question = gameQuiz.askQuestion()
                 assignButt(question)
             }
+            else{
+                incorrectButton(Button3)
+            }
         }
 
         Button4.setOnClickListener() {
             if (fourButt == answer) {
+                correctButton(Button4)
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
                 sText.text = "score: "+gscore
                 question = gameQuiz.askQuestion()
                 assignButt(question)
+            }
+            else{
+                incorrectButton(Button4)
             }
         }
 
@@ -155,8 +173,34 @@ class Game : AppCompatActivity() {
         //call the assign buttons function
         tumor.start()
         assignButt(question)
+    }
 
+    private fun correctButton(TheButton:TextView) {
+        TheButton.setBackgroundColor(Color.GREEN)
+        val waiting = object : CountDownTimer(200, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timeLeft = millisUntilFinished / 1000
+            }
 
+            override fun onFinish() {
+                TheButton.setBackgroundColor(Color.WHITE)
+            }
+        }
+        waiting.start()
+    }
+
+    private fun incorrectButton(TheButton:TextView) {
+        TheButton.setBackgroundColor(Color.RED)
+        val waiting = object : CountDownTimer(300, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timeLeft = millisUntilFinished / 1000
+            }
+
+            override fun onFinish() {
+                TheButton.setBackgroundColor(Color.WHITE)
+            }
+        }
+        waiting.start()
     }
 
     fun openActivity(DisScore:String)
