@@ -98,73 +98,42 @@ class Game : AppCompatActivity() {
             Button4.text = fourButt
         }
 
-
-        Button1.setOnClickListener {
-            if(firstButt == answer) {
-                correctButton(Button1)
+        fun answerCheck(TheButton:String, TheAnswer:String, actButton:TextView) {
+            if (TheButton == TheAnswer) {
+                correctButton(actButton)
                 gameQuiz.addPoint()
                 gscore = gameQuiz.score.toString()
-                sText.text = "score: "+gscore
+                sText.text = "score: " + gscore
                 question = gameQuiz.askQuestion()
                 assignButt(question)
-            }
-            else{
-                incorrectButton(Button1)
-            }
-        }
-        Button2.setOnClickListener() {
-            if(secButt == answer) {
-                correctButton(Button2)
-                gameQuiz.addPoint()
-                gscore = gameQuiz.score.toString()
-                sText.text = "score: "+gscore
-                question = gameQuiz.askQuestion()
-                assignButt(question)
-            }
-            else{
-                incorrectButton(Button2)
-            }
-        }
-
-        Button3.setOnClickListener() {
-            if(thirButt == answer) {
-                correctButton(Button3)
-                gameQuiz.addPoint()
-                gscore = gameQuiz.score.toString()
-                sText.text = "score: "+gscore
-                question = gameQuiz.askQuestion()
-                assignButt(question)
-            }
-            else{
-                incorrectButton(Button3)
-            }
-        }
-
-        Button4.setOnClickListener() {
-            if (fourButt == answer) {
-                correctButton(Button4)
-                gameQuiz.addPoint()
-                gscore = gameQuiz.score.toString()
-                sText.text = "score: "+gscore
-                question = gameQuiz.askQuestion()
-                assignButt(question)
-            }
-            else{
-                incorrectButton(Button4)
+            } else {
+                incorrectButton(actButton)
             }
         }
 
 
-            val tumor = object: CountDownTimer (gTime,1000)
-            {
-                override fun onTick(millisUntilFinished: Long)
-                {
-                    val timeLeft = millisUntilFinished/1000
+            Button1.setOnClickListener {
+                answerCheck(firstButt, answer, Button1)
+            }
+            Button2.setOnClickListener() {
+                answerCheck(secButt, answer, Button2)
+            }
+
+            Button3.setOnClickListener() {
+                answerCheck(thirButt, answer, Button3)
+            }
+
+            Button4.setOnClickListener() {
+                answerCheck(fourButt, answer, Button4)
+            }
+
+            val tumor = object : CountDownTimer(gTime, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val timeLeft = millisUntilFinished / 1000
                     gameTimer.setText("Time Remaining: " + timeLeft)
                 }
 
-                override fun onFinish()
-                {
+                override fun onFinish() {
                     openActivity(gscore)
                 }
             }
