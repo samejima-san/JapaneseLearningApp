@@ -44,7 +44,6 @@ class activity2 : AppCompatActivity() {
         {
             openGame(gameTime, gameKana)
         }
-
     }
 
     fun checkGana() : Array<Int>

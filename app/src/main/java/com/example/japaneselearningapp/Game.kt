@@ -1,5 +1,6 @@
 package com.example.japaneselearningapp
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import japaneseFiles.JapaneseCard
 import japaneseFiles.Quiz
 import kotlinx.android.synthetic.main.activity_game.*
@@ -142,6 +144,21 @@ class Game : AppCompatActivity() {
         //call the assign buttons function
         tumor.start()
         assignButt(question)
+    }
+
+    public override fun onBackPressed() {
+        val dialogbuilder = AlertDialog.Builder(this)
+        dialogbuilder.setMessage("Are you sure you want to give up?")
+            .setCancelable(false)
+            .setPositiveButton("Yes", DialogInterface.OnClickListener{
+                dialog, id -> finish()
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener{
+                dialog, id -> dialog.cancel()
+            })
+        val alert = dialogbuilder.create()
+        alert.setTitle("Quit")
+        alert.show()
     }
 
     private fun correctButton(TheButton:TextView) {
