@@ -33,7 +33,6 @@ class Game : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         var intent = intent
-        //var gTime = 60
         var gameTime = intent.getStringExtra("gameTime") //gets gametime from previous activity
         var gTime:Long = gameTime.toLong() //makes it an int
         var gameKana = intent.getIntArrayExtra("gameKana") //choosing hiragana or katakana

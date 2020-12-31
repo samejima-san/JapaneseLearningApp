@@ -10,8 +10,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
     }
 
     fun mainclick(view: View) {
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openActivity(){
-        val intent = Intent(this, activity2::class.java)
+        val intent = Intent(this, Main_Menu::class.java)
         startActivity(intent)
     }
 }

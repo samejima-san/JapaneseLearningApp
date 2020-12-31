@@ -4,24 +4,36 @@ package com.example.japaneselearningapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import android.view.View
+import android.widget.TextView
 
 lateinit var cbKata : CheckBox
 lateinit var cbHira: CheckBox
+lateinit var tvHira:TextView
+lateinit var tvKata:TextView
+
 class activity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activity2)
 
+        tvHira = findViewById<TextView>(R.id.textView2)
+        tvKata = findViewById<TextView>(R.id.textView3)
         cbHira = findViewById<CheckBox>(R.id.hiraganacheckbox)
         cbKata = findViewById<CheckBox>(R.id.katakanacheckbox)
         cbHira.isChecked = true
         cbKata.isChecked = true
         val thirButton = findViewById<Button>(R.id.thirButt)
         val minButton = findViewById<Button>(R.id.minButt)
+        var isInvisible = intent.getStringExtra("isInvisible") //gets isInvisible from previous activity
+        assignVisib(isInvisible) //sets visibility
+        Log.d("saint","-------------------------------------------------------------------------SHIT-----------------------------------------------------------------")
+        Log.d("here", isInvisible)
+
 
         thirButton.setOnClickListener {
             var num:Int = 30000 //thirty seconds
@@ -76,6 +88,22 @@ class activity2 : AppCompatActivity() {
         {
             //message appears saying user needs to select a learning path
             return temp
+        }
+    }
+
+    fun assignVisib(areInvis:String)
+    {
+        if(areInvis == "roma") {
+            cbHira.visibility = View.VISIBLE
+            cbKata.visibility = View.VISIBLE
+            tvKata.visibility = View.VISIBLE
+            tvHira.visibility = View.VISIBLE
+        }
+        else{
+            cbHira.visibility = View.GONE
+            cbKata.visibility = View.GONE
+            tvKata.visibility = View.GONE
+            tvHira.visibility = View.GONE
         }
     }
 
