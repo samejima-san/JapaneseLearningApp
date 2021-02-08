@@ -1,19 +1,15 @@
 package japaneseFiles
 import kotlin.random.Random
 
-//timer = get gTime from Game.kt, Deck = get gameKana from Game.kt
-class Quiz(var score:Int = 0, var Deck: Array<Int>)
+class Quiz(var score:Int = 0)
 {
-    fun askQuestion():Array<JapaneseCard>
+    fun askQuestion():Array<JapaneseCard> //ask based on
     {
-
         val random  = getDiffNum() //gets a set of random numbers within the bounds of the kana deck
-        val card = chooseDeck(Deck, random.elementAt(0))//chooses a deck and returns your card
+        val card = JapaneseDeck[random.elementAt(0)]//chooses a deck and returns your card
         //put the kana into an array with 3 random others
-        val question : Array<JapaneseCard> = arrayOf(card, HIRAGANA_DECK[random.elementAt(1)],HIRAGANA_DECK[random.elementAt(2)],HIRAGANA_DECK[random.elementAt(3)])
-
+        val question : Array<JapaneseCard> = arrayOf(card, JapaneseDeck[random.elementAt(1)],JapaneseDeck[random.elementAt(2)],JapaneseDeck[random.elementAt(3)])
         return arrayOf(question[0],question[1],question[2],question[3])
-
     }
 
     fun getDiffNum(): MutableSet<Int> {
@@ -26,28 +22,16 @@ class Quiz(var score:Int = 0, var Deck: Array<Int>)
         return questionSet
     }
 
-    fun chooseDeck(choice :Array<Int>, randomnum:Int):JapaneseCard{
+    fun askHira(question : Array<JapaneseCard>):Array<String>{
+    return arrayOf(question[0].showKText(), question[0].showHText(),question[1].showHText(),question[2].showHText(),question[3].showHText())
+    }
 
-        if(choice.contentDeepEquals(arrayOf(1,0)))
-        {
-            //Hiragana only
-            return HIRAGANA_DECK[randomnum]
-        }
-        else if (choice.contentDeepEquals(arrayOf(0,1)))
-        {
-            //Katakana only
-            return KATAKANA_DECK[randomnum]
-        }
-        else
-        {
-            //both
-            val randommeme:Int = Random.nextInt(0,2)
-            return if(randommeme==0) {
-                HIRAGANA_DECK[randomnum]
-            } else {
-                KATAKANA_DECK[randomnum]
-            }
-        }
+    fun askKata(question : Array<JapaneseCard>):Array<String>{
+        return arrayOf(question[0].showHText(), question[0].showKText(),question[1].showKText(),question[2].showKText(),question[3].showKText())
+    }
+
+    fun askRoma(question : Array<JapaneseCard>):Array<String>{
+        return arrayOf(question[0].showHText(), question[0].showRText(),question[1].showRText(),question[2].showRText(),question[3].showRText())
     }
 
     fun addPoint()

@@ -14,6 +14,7 @@ import japaneseFiles.JapaneseCard
 import japaneseFiles.Quiz
 import kotlinx.android.synthetic.main.activity_game.*
 import org.w3c.dom.Text
+import java.lang.Exception
 import java.util.Collections.shuffle
 import kotlin.random.Random
 
@@ -40,6 +41,7 @@ class Game : AppCompatActivity() {
         var gameTimer = findViewById<TextView>(R.id.timer_text)
         var displayTimerText:Long = gTime / 1000
         gameTimer.text = "Time Remaining: " + displayTimerText
+        var qkana = intent.getStringExtra("kana")
         var dgameKana = findViewById<TextView>(R.id.displayKana)
 
         var firstButt:String = ""
@@ -58,28 +60,50 @@ class Game : AppCompatActivity() {
         val Button4 = findViewById<TextView>(R.id.button4)
 
 
-        val gameQuiz = Quiz(0, gKana)//arrayOf(1,1)
+        val gameQuiz = Quiz(0)//arrayOf(1,1)
         var question = gameQuiz.askQuestion() //this returns an array of Kana, with Question[0]being the one we are looking for
+
         val sText=findViewById<TextView>(R.id.textView7)
         gscore = gameQuiz.score.toString()
         sText.text = "score: "+gscore
         //assign each kana to a button, only their romaji forms so .showUText or whatever
         //when time reaches 0 stop the game
 
-        fun assignButt(question:Array<JapaneseCard>)
-        {
-            kanaText = question[0].showDText()
-            //randomize order of layout
-            displayKana.text = kanaText
-            answer= question[0].showUText()
-            //for now I will leave it in order
-            var cards  = arrayOf<Int>(0,1,2,3)
+        fun select(cards:Array<JapaneseCard>, choice:String):Array<String>{
+            return when(choice){
+                "roma" -> gameQuiz.askRoma(cards) //select for r
+                "hira"-> gameQuiz.askHira(cards) // select for h
+                "kata" -> gameQuiz.askKata(cards) //select for k
+                else -> throw Exception("how did you even get here")
+                }
+            }
 
+        fun setButtons(cards:Array<String>, choice:String){
+            firstButt = cards[1]
+            secButt = cards[2]
+            thirButt = cards[3]
+            fourButt = cards[4]
+            Button1.text = firstButt
+            Button2.text = secButt
+            Button3.text = thirButt
+            Button4.text = fourButt
+        }
+
+
+        fun assignButt(question:Array<JapaneseCard>, choice:String) {//assume the 4 len array
+            //select an array of cards
+            val cards = select(question, choice)
+            //assign the answer text
+            kanaText = cards[0]
+            displayKana.text = kanaText
+            //assign the answer card at top and save the variable
+            answer = cards[1]
+            //randomize cards
             for(card in cards)
             {
-                var r1 = Random.nextInt(0,4)
-                var r2 = Random.nextInt(0,4)
-                var temp:Int = 0
+                var r1 = Random.nextInt(1,5)
+                var r2 = Random.nextInt(1,5)
+                var temp:String = "none"
                 if(r1!=r2)
                 {
                     temp = cards[r1]
@@ -87,17 +111,11 @@ class Game : AppCompatActivity() {
                     cards[r2] = temp
                 }
             }
-
-
-            firstButt = question[cards[0]].showUText()
-            secButt = question[cards[1]].showUText()
-            thirButt = question[cards[2]].showUText()
-            fourButt = question[cards[3]].showUText()
-            Button1.text = firstButt
-            Button2.text = secButt
-            Button3.text = thirButt
-            Button4.text = fourButt
+            //assign cards to buttons
+            setButtons(cards, choice)
         }
+
+
 
         fun answerCheck(TheButton:String, TheAnswer:String, actButton:TextView) {
             if (TheButton == TheAnswer) {
@@ -106,7 +124,8 @@ class Game : AppCompatActivity() {
                 gscore = gameQuiz.score.toString()
                 sText.text = "score: " + gscore
                 question = gameQuiz.askQuestion()
-                assignButt(question)
+                assignButt(question,qkana)
+
             } else {
                 incorrectButton(actButton)
             }
@@ -142,7 +161,8 @@ class Game : AppCompatActivity() {
 
         //call the assign buttons function
         tumor.start()
-        assignButt(question)
+        assignButt(question, qkana)
+
     }
 
     public override fun onBackPressed() {

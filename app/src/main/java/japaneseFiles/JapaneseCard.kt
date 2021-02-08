@@ -1,142 +1,86 @@
 package japaneseFiles
 
 class JapaneseCard(
-    val dText: String,//display text, what will be shown on the shown part
+    val hText: String,//display text, what will be shown on the shown part
+    val kText: String, //katakana
     val uText: String//Romanized version of the card
 
 ) {
-    fun showDText():String
+    fun showHText():String
     {
-        return this.dText
+        return this.hText
     }
 
-    fun  showUText():String
+    fun showKText():String
+    {
+        return this.kText
+    }
+
+    fun  showRText():String
     {
         return this.uText
     }
 
 }
 
-val HIRAGANA_DECK : Array<JapaneseCard> = arrayOf(
-    JapaneseCard("あ","a"),
-    JapaneseCard("い","i"),
-    JapaneseCard("う","u"),
-    JapaneseCard("え","e"),
-    JapaneseCard("お","o"),
+val JapaneseDeck : Array<JapaneseCard> = arrayOf(
+    JapaneseCard("あ", "ア","a"),
+    JapaneseCard("い","イ","i"),
+    JapaneseCard("う","ウ","u"),
+    JapaneseCard("え","エ","e"),
+    JapaneseCard("お","オ","o"),
 
-    JapaneseCard("か","ka"),
-    JapaneseCard("き","ki"),
-    JapaneseCard("く","ku"),
-    JapaneseCard("け","ke"),
-    JapaneseCard("こ","ko"),
+    JapaneseCard("か","カ","ka"),
+    JapaneseCard("き","キ","ki"),
+    JapaneseCard("く","ク","ku"),
+    JapaneseCard("け","ケ","ke"),
+    JapaneseCard("こ","コ","ko"),
 
-    JapaneseCard("さ","sa"),
-    JapaneseCard("し","shi"),
-    JapaneseCard("す","su"),
-    JapaneseCard("せ","se"),
-    JapaneseCard("そ","so"),
+    JapaneseCard("さ","サ","sa"),
+    JapaneseCard("し","シ","shi"),
+    JapaneseCard("す","ス","su"),
+    JapaneseCard("せ","セ","se"),
+    JapaneseCard("そ","ソ","so"),
 
-    JapaneseCard("た","ta"),
-    JapaneseCard("ち","chi"),
-    JapaneseCard("つ","tsu"),
-    JapaneseCard("て","te"),
-    JapaneseCard("と","to"),
+    JapaneseCard("た","タ","ta"),
+    JapaneseCard("ち","チ","chi"),
+    JapaneseCard("つ","ツ","tsu"),
+    JapaneseCard("て","テ","te"),
+    JapaneseCard("と","ト","to"),
 
-    JapaneseCard("な","na"),
-    JapaneseCard("に","ni"),
-    JapaneseCard("ぬ","nu"),
-    JapaneseCard("ね","ne"),
-    JapaneseCard("の","no"),
-
-
-    JapaneseCard("は","ha"),
-    JapaneseCard("ひ","hi"),
-    JapaneseCard("ふ","fu"),
-    JapaneseCard("へ","he"),
-    JapaneseCard("ほ","ho"),
+    JapaneseCard("な","ナ","na"),
+    JapaneseCard("に","ニ","ni"),
+    JapaneseCard("ぬ","ヌ","nu"),
+    JapaneseCard("ね","ネ","ne"),
+    JapaneseCard("の","ノ","no"),
 
 
-    JapaneseCard("ま","ma"),
-    JapaneseCard("み","mi"),
-    JapaneseCard("む","mu"),
-    JapaneseCard("め","me"),
-    JapaneseCard("も","mo"),
+    JapaneseCard("は","ハ","ha"),
+    JapaneseCard("ひ","ヒ","hi"),
+    JapaneseCard("ふ","フ","fu"),
+    JapaneseCard("へ","ヘ","he"),
+    JapaneseCard("ほ","ホ","ho"),
 
 
-    JapaneseCard("ら","ra"),
-    JapaneseCard("り","ri"),
-    JapaneseCard("る","ru"),
-    JapaneseCard("れ","re"),
-    JapaneseCard("ろ","ro"),
+    JapaneseCard("ま","マ","ma"),
+    JapaneseCard("み","ミ","mi"),
+    JapaneseCard("む","ム","mu"),
+    JapaneseCard("め","メ","me"),
+    JapaneseCard("も","モ","mo"),
 
 
-    JapaneseCard("や","ya"),
-    JapaneseCard("ゆ","yu"),
-    JapaneseCard("よ","yo"),
-
-    JapaneseCard("わ","wa"),
-    JapaneseCard("を","wo"),
-    JapaneseCard("ん","n")
-)
-
-val KATAKANA_DECK : Array<JapaneseCard> = arrayOf(
-    JapaneseCard("ア","a"),
-    JapaneseCard("イ","i"),
-    JapaneseCard("ウ","u"),
-    JapaneseCard("エ","e"),
-    JapaneseCard("オ","o"),
-
-    JapaneseCard("カ","ka"),
-    JapaneseCard("キ","ki"),
-    JapaneseCard("ク","ku"),
-    JapaneseCard("ケ","ke"),
-    JapaneseCard("コ","ko"),
-
-    JapaneseCard("サ","sa"),
-    JapaneseCard("シ","shi"),
-    JapaneseCard("ス","su"),
-    JapaneseCard("セ","se"),
-    JapaneseCard("ソ","so"),
-
-    JapaneseCard("タ","ta"),
-    JapaneseCard("チ","chi"),
-    JapaneseCard("ツ","tsu"),
-    JapaneseCard("テ","te"),
-    JapaneseCard("ト","to"),
-
-    JapaneseCard("ナ","na"),
-    JapaneseCard("ニ","ni"),
-    JapaneseCard("ヌ","nu"),
-    JapaneseCard("ネ","ne"),
-    JapaneseCard("ノ","no"),
+    JapaneseCard("ら","ラ","ra"),
+    JapaneseCard("り","リ","ri"),
+    JapaneseCard("る","ル","ru"),
+    JapaneseCard("れ","レ","re"),
+    JapaneseCard("ろ","ロ","ro"),
 
 
-    JapaneseCard("ハ","ha"),
-    JapaneseCard("ヒ","hi"),
-    JapaneseCard("フ","fu"),
-    JapaneseCard("ヘ","he"),
-    JapaneseCard("ホ","ho"),
+    JapaneseCard("や","ヤ","ya"),
+    JapaneseCard("ゆ","ユ","yu"),
+    JapaneseCard("よ","ヨ","yo"),
 
-
-    JapaneseCard("マ","ma"),
-    JapaneseCard("ミ","mi"),
-    JapaneseCard("ム","mu"),
-    JapaneseCard("メ","me"),
-    JapaneseCard("モ","mo"),
-
-
-    JapaneseCard("ラ","ra"),
-    JapaneseCard("リ","ri"),
-    JapaneseCard("ル","ru"),
-    JapaneseCard("レ","re"),
-    JapaneseCard("ロ","ro"),
-
-
-    JapaneseCard("ヤ","ya"),
-    JapaneseCard("ユ","yu"),
-    JapaneseCard("ヨ","yo"),
-
-    JapaneseCard("ワ","wa"),
-    JapaneseCard("ヲ","wo"),
-    JapaneseCard("ン","n")
+    JapaneseCard("わ","ワ","wa"),
+    JapaneseCard("を","ヲ","wo"),
+    JapaneseCard("ん","ン","n")
 )

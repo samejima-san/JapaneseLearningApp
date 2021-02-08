@@ -31,61 +31,51 @@ class activity2 : AppCompatActivity() {
         val minButton = findViewById<Button>(R.id.minButt)
         var isInvisible = intent.getStringExtra("isInvisible") //gets isInvisible from previous activity
         assignVisib(isInvisible) //sets visibility
-        Log.d("saint","-------------------------------------------------------------------------SHIT-----------------------------------------------------------------")
-        Log.d("here", isInvisible)
-
 
         thirButton.setOnClickListener {
             var num:Int = 30000 //thirty seconds
-            setGame(num, checkGana())
+            setGame(num, checkGana(), isInvisible)
         }
 
         minButton.setOnClickListener{
             var num:Int = 60000 //sixty seconds
-            setGame(num, checkGana())
+            setGame(num, checkGana(), isInvisible)
         }
     }
 
-    fun setGame(gameTime: Int, gameKana: Array<Int>) {
-        if (gameKana.contentDeepEquals(arrayOf(0,0)))
-        {
+    fun setGame(gameTime: Int, gameKana: Array<Int>, kanachoice:String) {
+        if (gameKana.contentDeepEquals(arrayOf(0,0))) {
             //then do nothing
             displayError()
         }
-        else
-        {
-            openGame(gameTime, gameKana)
+        else {
+            openGame(gameTime, gameKana, kanachoice)
         }
     }
 
-    fun checkGana() : Array<Int>
-    {
+    fun checkGana() : Array<Int> {
         val temp : Array<Int> = arrayOf(1,1)
         temp[0] = 0
         temp[1] = 0
-        if(cbHira.isChecked && cbKata.isChecked)
-        {
+        if(cbHira.isChecked && cbKata.isChecked) {
             //then both hiragana and katakana is active
             temp[0] = 1
             temp[1] = 1
             return temp
         }
-        else if(cbHira.isChecked && !cbKata.isChecked)
-        {
+        else if(cbHira.isChecked && !cbKata.isChecked) {
             //then only hiragana
             temp[0] = 1
             temp[1] = 0
             return temp
         }
-        else if(!cbHira.isChecked && cbKata.isChecked)
-        {
+        else if(!cbHira.isChecked && cbKata.isChecked) {
             //then only Katakana
             temp[0] = 0
             temp[1] = 1
             return temp
         }
-        else
-        {
+        else {
             //message appears saying user needs to select a learning path
             return temp
         }
@@ -104,19 +94,26 @@ class activity2 : AppCompatActivity() {
             cbKata.visibility = View.GONE
             tvKata.visibility = View.GONE
             tvHira.visibility = View.GONE
+            if(areInvis== "hira"){
+                cbHira.isChecked = true
+                cbKata.isChecked = false
+            }
+            else{
+                cbHira.isChecked = false
+                cbKata.isChecked = false
+            }
         }
     }
 
-    fun displayError()
-    {
+    fun displayError() {
         Toast.makeText(this@activity2,"Enable a Kana", Toast.LENGTH_SHORT).show()
     }
 
-    fun openGame(gameTime :Int, gameKana: Array<Int>)
-    {
+    fun openGame(gameTime :Int, gameKana: Array<Int>, kana:String) {
             val intent = Intent(this, Game::class.java)
             intent.putExtra("gameTime", gameTime.toString())
             intent.putExtra("gameKana", gameKana.toIntArray())
+            intent.putExtra("kana", kana)
             startActivity(intent)
     }
 
