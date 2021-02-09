@@ -45,8 +45,13 @@ class activity2 : AppCompatActivity() {
 
     fun setGame(gameTime: Int, gameKana: Array<Int>, kanachoice:String) {
         if (gameKana.contentDeepEquals(arrayOf(0,0))) {
-            //then do nothing
-            displayError()
+            if(kanachoice == "kata" || kanachoice == "hira") {
+                openGame(gameTime, arrayOf(1,1), kanachoice)
+            }
+            else {
+                //then do nothing
+                displayError()
+            }
         }
         else {
             openGame(gameTime, gameKana, kanachoice)

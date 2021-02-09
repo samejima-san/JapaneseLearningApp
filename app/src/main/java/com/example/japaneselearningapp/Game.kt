@@ -60,7 +60,7 @@ class Game : AppCompatActivity() {
         val Button4 = findViewById<TextView>(R.id.button4)
 
 
-        val gameQuiz = Quiz(0)//arrayOf(1,1)
+        val gameQuiz = Quiz(0)
         var question = gameQuiz.askQuestion() //this returns an array of Kana, with Question[0]being the one we are looking for
 
         val sText=findViewById<TextView>(R.id.textView7)
@@ -71,14 +71,14 @@ class Game : AppCompatActivity() {
 
         fun select(cards:Array<JapaneseCard>, choice:String):Array<String>{
             return when(choice){
-                "roma" -> gameQuiz.askRoma(cards) //select for r
+                "roma" -> gameQuiz.askRoma(cards, gKana) //select for r
                 "hira"-> gameQuiz.askHira(cards) // select for h
                 "kata" -> gameQuiz.askKata(cards) //select for k
                 else -> throw Exception("how did you even get here")
                 }
             }
 
-        fun setButtons(cards:Array<String>, choice:String){
+        fun setButtons(cards:Array<String>){
             firstButt = cards[1]
             secButt = cards[2]
             thirButt = cards[3]
@@ -103,7 +103,7 @@ class Game : AppCompatActivity() {
             {
                 var r1 = Random.nextInt(1,5)
                 var r2 = Random.nextInt(1,5)
-                var temp:String = "none"
+                var temp:String
                 if(r1!=r2)
                 {
                     temp = cards[r1]
@@ -112,7 +112,7 @@ class Game : AppCompatActivity() {
                 }
             }
             //assign cards to buttons
-            setButtons(cards, choice)
+            setButtons(cards)
         }
 
 
