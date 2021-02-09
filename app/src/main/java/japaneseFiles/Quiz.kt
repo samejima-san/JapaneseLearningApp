@@ -24,7 +24,7 @@ class Quiz(var score:Int = 0)
     }
 
     fun askHira(question : Array<JapaneseCard>):Array<String>{
-    return arrayOf(question[0].showKText(), question[0].showHText(),question[1].showHText(),question[2].showHText(),question[3].showHText())
+        return arrayOf(question[0].showKText(), question[0].showHText(),question[1].showHText(),question[2].showHText(),question[3].showHText())
     }
 
     fun askKata(question : Array<JapaneseCard>):Array<String>{

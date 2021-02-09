@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 lateinit var DisScore: TextView
 lateinit var goBack :Button
+lateinit var MainMenu:Button
 class scoreshow : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,12 @@ class scoreshow : AppCompatActivity() {
         var goBack = findViewById<TextView>(R.id.button5)
 
         DisScore.text = "Your score is " + scoreNum
+
+        var MainMenu = findViewById<TextView>(R.id.button9)
+
+        MainMenu.setOnClickListener{
+            goingBack()
+        }
 
         goBack.setOnClickListener{
             openActivity(scoreNum)
@@ -46,6 +53,11 @@ class scoreshow : AppCompatActivity() {
 
 
         val intent = Intent(this, activity2::class.java)
+        startActivity(intent)
+    }
+
+    private fun goingBack(){
+        val intent = Intent(this, Main_Menu::class.java)
         startActivity(intent)
     }
 
